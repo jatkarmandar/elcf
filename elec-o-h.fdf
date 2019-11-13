@@ -1,0 +1,145 @@
+SystemName  elec
+SystemLabel elec
+
+==================================================
+==================================================
+# SPECIES AND BASIS
+
+# Number of species 
+NumberOfSpecies 4
+%block ChemicalSpeciesLabel
+    1  42 Mo
+    2  1  H
+    3  16 S
+    4  8  O
+%endblock ChemicalSpeciesLabel
+
+==================================================
+
+==================================================
+# K-points
+
+%block kgrid_Monkhorst_Pack
+1   0   0   0.0
+0   1   0   0.0
+0   0   31  0.0
+%endblock kgrid_Monkhorst_Pack
+
+==================================================
+==================================================
+# UNIT CELL AND ATOMIC POSITIONS
+
+# UNIT CELL
+LatticeConstant       1.000 Ang
+
+%block LatticeVectors
+      4.26544861621 0.0           0.0
+      0.0           10.9540027066 0.0 
+      0.0           0.0           5.26171988
+%endblock LatticeVectors 
+
+# Atomic coordinates
+NumberOfAtoms 20
+
+AtomicCoordinatesFormat Ang
+%block AtomicCoordinatesAndAtomicSpecies
+                                2.132724308106   3.068726803185   0.809999941893 1
+                                2.132724308106   6.222548836655   0.809999941893 1
+                                2.132724308106   9.376370870125   0.809999941893 1
+                                0.809999941892  10.225862189068   1.201362144368 4
+                                3.455448674319  10.225862189068   1.201362144368 4
+                                1.038618968151   0.860133773906   1.273763307269 2
+                                3.22682964806    0.860133773906   1.273763307269 2
+                                2.132724308106   1.49181578645    1.720429941893 3
+                                2.132724308106   4.64563781992    1.720429941892 3
+                                2.132724308106   7.79945985339    1.720429941892 3
+                                2.132724308106   1.49181578645    3.541289941892 1
+                                2.132724308106   4.64563781992    3.541289941892 1
+                                2.132724308106   7.79945985339    3.541289941892 1
+                                0.809999941892   0.728140517553   4.081289903154 2
+                                3.455448674319   0.728140517553   4.081289903154 2
+                                1.038618968151  10.079036529004   4.128000589227 4
+                                3.22682964806   10.079036529004   4.128000589227 4
+                                2.132724308106   3.068726803185   4.451719941892 3
+                                2.132724308106   6.222548836655   4.451719941892 3
+                                2.132724308106   9.376370870125   4.451719941892 3          
+%endblock AtomicCoordinatesAndAtomicSpecies
+
+
+==================================================
+==================================================
+# General variables
+
+ElectronicTemperature  100 K 
+MeshCutoff           70. Ry
+xc.functional         GGA           # Exchange-correlation functional
+xc.authors            PBE
+SpinPolarized .false.
+SolutionMethod Diagon
+
+==================================================
+               
+OccupationFunction      MP                                             
+FixSpin                 F                        
+
+MaxSCFIterations        20                                    
+DM.NumberPulay          6                        
+DM.NumberBroyden        0                        
+DM.MixingWeight         0.1000000000             
+DM.OccupancyTolerance   0.1000000000E-11         
+DM.NumberKick           0                        
+DM.KickMixingWeight     0.5000000000             
+DM.Tolerance            0.1000000000E-03         
+
+UseSaveData             T                        
+
+         
+
+# MD variables
+
+MD.FinalTimeStep 1
+MD.TypeOfRun CG
+MD.NumCGsteps     000
+MD.UseSaveXV      .true.
+Diag.ParallelOverK      T                        
+                       
+PAO.EnergyShift         50 meV                   
+PAO.SplitNorm           0.1500000000             
+PAO.BasisType           split                    
+PAO.BasisSize           SZP          
+                          
+
+
+
+WriteMullikenPop        0      
+WriteDenchar            T      
+WriteKpoints            T      
+WriteForces             T      
+WriteDM                 T      
+WriteXML                T      
+WriteBands              F      
+WriteKbands             F      
+WriteEigenvalues        T      
+WriteCoorStep           T      
+WriteMDhistory          T      
+WriteMDXmol             T      
+WriteWaveFunctions      F      
+WriteCoorXmol           T      
+
+
+
+
+
+WriteCoorXmol .true.
+
+BandLinesScale ReciprocalLatticeVectors
+
+%block BandLines
+1   0.0 0.0 0.0 \Gamma
+100 0.0 0.0 0.5 X
+%endblock BandLines
+
+
+
+TS.WriteHS  .true.
+
